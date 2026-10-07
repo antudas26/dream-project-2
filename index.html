@@ -1,11 +1,1212 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Antu Das - Personal Portfolio</title>
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* CSS Reset & Global Variables */
+        :root {
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --primary-light: #eef2ff;
+            --secondary: #0f172a;
+            --text-main: #334155;
+            --text-muted: #64748b;
+            --bg-light: #f8fafc;
+            --white: #ffffff;
+            --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.05);
+            --shadow-md: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
+            --shadow-lg: 0 20px 30px -10px rgba(79, 70, 229, 0.15);
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', 'Hind Siliguri', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Container Layout */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .section-padding {
+            padding: 5rem 0;
+        }
+
+        /* Section Titles */
+        .section-title-wrapper {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .section-subtitle {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .section-title {
+            font-size: 2.25rem;
+            color: var(--secondary);
+            font-weight: 800;
+        }
+
+        /* Buttons Component */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.85rem 1.75rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: var(--transition);
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+            box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(79, 70, 229, 0.45);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-2px);
+        }
+
+        /* Header & Navbar */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: var(--transition);
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        .header.scrolled {
+            box-shadow: var(--shadow-sm);
+            background-color: rgba(255, 255, 255, 0.95);
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-main);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background-color: var(--primary);
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-toggle {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--secondary);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding-top: 180px;
+            padding-bottom: 100px;
+            background: radial-gradient(circle at top right, rgba(79, 70, 229, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at bottom left, rgba(238, 242, 255, 0.8) 0%, transparent 50%);
+            position: relative;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 1rem;
+            background-color: var(--primary-light);
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.85rem;
+            border-radius: 50px;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title {
+            font-size: 3.25rem;
+            line-height: 1.2;
+            color: var(--secondary);
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .hero-title span {
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary) 0%, #818cf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-description {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            max-width: 580px;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-img-wrapper {
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-img-bg {
+            position: absolute;
+            width: 320px;
+            height: 320px;
+            background: linear-gradient(135deg, var(--primary) 0%, #818cf8 100%);
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            animation: morphing 8s ease-in-out infinite;
+            opacity: 0.15;
+            z-index: 1;
+        }
+
+        @keyframes morphing {
+            0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+            25% { border-radius: 50% 50% 30% 70% / 50% 30% 70% 50%; }
+            50% { border-radius: 70% 30% 50% 50% / 30% 70% 30% 70%; }
+            75% { border-radius: 40% 60% 70% 30% / 40% 50% 50% 60%; }
+            100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+        }
+
+        .hero-avatar {
+            width: 320px;
+            height: 380px;
+            object-fit: cover;
+            border-radius: var(--radius-lg);
+            z-index: 2;
+            box-shadow: var(--shadow-lg);
+            border: 6px solid var(--white);
+        }
+
+        /* Slider Section */
+        .slider-section {
+            background-color: var(--white);
+            border-top: 1px solid #e2e8f0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .slider-container {
+            position: relative;
+            max-width: 950px;
+            margin: 0 auto;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            background-color: var(--secondary);
+        }
+
+        .slider-wrapper {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            width: 100%;
+        }
+
+        .slide {
+            min-width: 100%;
+            position: relative;
+            height: 480px;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.85;
+        }
+
+        .slide-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 3rem 2rem 2rem;
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.95), transparent);
+            color: var(--white);
+        }
+
+        .slide-caption h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .slide-caption p {
+            font-size: 0.95rem;
+            color: #cbd5e1;
+        }
+
+        /* Slider Controls */
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 48px;
+            height: 48px;
+            background-color: rgba(255, 255, 255, 0.85);
+            color: var(--secondary);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 10;
+            backdrop-filter: blur(4px);
+        }
+
+        .slider-btn:hover {
+            background-color: var(--primary);
+            color: var(--white);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .slider-btn.prev { left: 20px; }
+        .slider-btn.next { right: 20px; }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 20px;
+            right: 30px;
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .dot.active {
+            width: 28px;
+            border-radius: 10px;
+            background-color: var(--primary);
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 3.5rem;
+            align-items: center;
+        }
+
+        .about-card {
+            background-color: var(--white);
+            padding: 2.5rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            border: 1px solid #e2e8f0;
+        }
+
+        .about-card p {
+            margin-bottom: 1.2rem;
+            color: var(--text-main);
+            font-size: 1.05rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #f1f5f9;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-item span.label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .info-item span.val {
+            font-size: 1rem;
+            color: var(--secondary);
+            font-weight: 700;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid #e2e8f0;
+            transition: var(--transition);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: rgba(79, 70, 229, 0.3);
+        }
+
+        .skill-icon {
+            width: 55px;
+            height: 55px;
+            background-color: var(--primary-light);
+            color: var(--primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .skill-card h3 {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .skill-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background-color: var(--white);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid #e2e8f0;
+            transition: var(--transition);
+        }
+
+        .project-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .project-img {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .project-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .project-img img {
+            transform: scale(1.05);
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            padding: 0.2rem 0.6rem;
+            background-color: var(--primary-light);
+            color: var(--primary);
+            border-radius: 4px;
+            font-weight: 700;
+        }
+
+        .project-content h3 {
+            font-size: 1.25rem;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .project-content p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            margin-bottom: 1.2rem;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+
+        /* Contact Section */
+        .contact-card-wrapper {
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 2.5rem;
+            background-color: var(--white);
+            padding: 3rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            border: 1px solid #e2e8f0;
+        }
+
+        .contact-info h3 {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .contact-info p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .contact-details-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .contact-icon {
+            width: 45px;
+            height: 45px;
+            background-color: var(--primary-light);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background-color: var(--bg-light);
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            transition: var(--transition);
+        }
+
+        .social-icon:hover {
+            background-color: var(--primary);
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+
+        /* Contact Form */
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--secondary);
+            margin-bottom: 0.4rem;
+        }
+
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            border: 1px solid #cbd5e1;
+            border-radius: var(--radius-sm);
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            background-color: #fafafa;
+        }
+
+        .form-input:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            background-color: var(--white);
+            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary);
+            color: #94a3b8;
+            padding: 2.5rem 0;
+            text-align: center;
+            font-size: 0.95rem;
+            border-top: 1px solid #1e293b;
+        }
+
+        footer p span {
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 992px) {
+            .hero-grid, .about-grid, .contact-card-wrapper {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .hero {
+                padding-top: 140px;
+                text-align: center;
+            }
+
+            .hero-description {
+                margin: 0 auto 2rem;
+            }
+
+            .hero-btns {
+                justify-content: center;
+            }
+
+            .hero-img-wrapper {
+                order: -1;
+            }
+
+            .slide {
+                height: 380px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                justify-content: center;
+                gap: 2rem;
+                transition: var(--transition);
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+
+            .hero-title {
+                font-size: 2.25rem;
+            }
+
+            .slide {
+                height: 300px;
+            }
+
+            .slider-btn {
+                width: 38px;
+                height: 38px;
+                font-size: 0.9rem;
+            }
+
+            .contact-card-wrapper {
+                padding: 1.8rem;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    
+
+    <!-- Navigation Bar -->
+    <header class="header" id="header">
+        <div class="container navbar">
+            <a href="#home" class="logo">
+                Antu<span>.Das</span>
+            </a>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#home" class="nav-link active">হোম</a></li>
+                <li><a href="#about" class="nav-link">আমার সম্পর্কে</a></li>
+                <li><a href="#slider" class="nav-link">গ্যালারি</a></li>
+                <li><a href="#skills" class="nav-link">দক্ষতা</a></li>
+                <li><a href="#projects" class="nav-link">প্রজেক্টস</a></li>
+                <li><a href="#contact" class="nav-link">যোগাযোগ</a></li>
+            </ul>
+
+            <div class="nav-toggle" id="nav-toggle">
+                <i class="fa-solid fa-bars-staggered"></i>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="container hero-grid">
+                <div class="hero-content">
+                    <span class="hero-badge">
+                        <i class="fa-solid fa-circle-check"></i> এভেলেবল ফর ফ্রিল্যান্স কাজ
+                    </span>
+                    <h1 class="hero-title">হ্যালো, আমি <span>অন্তু দাস</span></h1>
+                    <p class="hero-description">
+                        আমি একজন প্রফেশনাল ওয়েব ডেভেলপার ও ক্রিয়েটিভ ডিজাইনার। ডিজিটাল জগতের আইডিয়াগুলোকে বাস্তব ও আকর্ষণীয় ওয়েবসাইটে রূপান্তর করাই আমার প্রধান লক্ষ্য।
+                    </p>
+                    <div class="hero-btns">
+                        <a href="#contact" class="btn btn-primary">
+                            <i class="fa-solid fa-paper-plane"></i> যোগাযোগ করুন
+                        </a>
+                        <a href="#projects" class="btn btn-outline">
+                            <i class="fa-solid fa-briefcase"></i> কাজ দেখুন
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hero-img-wrapper">
+                    <div class="hero-img-bg"></div>
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop" alt="Antu Das" class="hero-avatar">
+                </div>
+            </div>
+        </section>
+
+        <!-- Image Slider / Showcase Carousel -->
+        <section class="section-padding slider-section" id="slider">
+            <div class="container">
+                <div class="section-title-wrapper">
+                    <span class="section-subtitle">হাইলাইটস</span>
+                    <h2 class="section-title">আমার কাজের ছবি ও গ্যালারি</h2>
+                </div>
+
+                <div class="slider-container">
+                    <div class="slider-wrapper" id="slider-wrapper">
+                        <!-- Slide 1 -->
+                        <div class="slide">
+                            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop" alt="Web Development Workstation">
+                            <div class="slide-caption">
+                                <h3>মডার্ন কোডিং ওয়ার্কস্পেস</h3>
+                                <p>ক্লিন ও অপটিমাইজড কোড দিয়ে ওয়েবসাইট তৈরি করা আমার পছন্দ।</p>
+                            </div>
+                        </div>
+                        <!-- Slide 2 -->
+                        <div class="slide">
+                            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200&auto=format&fit=crop" alt="Full Stack Code Environment">
+                            <div class="slide-caption">
+                                <h3>ফ্রন্টএন্ড ও ইউজার এক্সপেরিয়েন্স</h3>
+                                <p>সহজ ও ফ্রেন্ডলি ইউজার ইন্টারফেস তৈরিতে বিশেষ গুরুত্ব দিয়ে থাকি।</p>
+                            </div>
+                        </div>
+                        <!-- Slide 3 -->
+                        <div class="slide">
+                            <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=1200&auto=format&fit=crop" alt="UI Design Planning">
+                            <div class="slide-caption">
+                                <h3>ক্রিয়েটিভ ডিজাইন কনসেপ্ট</h3>
+                                <p>যেকোনো ব্র্যান্ডের জন্য মানানসই কালার কম্বিনেশন ও লেআউট প্ল্যানিং।</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slider Controls -->
+                    <button class="slider-btn prev" id="prev-btn">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <button class="slider-btn next" id="next-btn">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+
+                    <!-- Indicators/Dots -->
+                    <div class="slider-dots" id="slider-dots"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="section-padding" id="about">
+            <div class="container">
+                <div class="section-title-wrapper">
+                    <span class="section-subtitle">পরিচিতি</span>
+                    <h2 class="section-title">আমার সম্পর্কে জানুন</h2>
+                </div>
+
+                <div class="about-grid">
+                    <div>
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=800&auto=format&fit=crop" alt="Antu Das Teamwork" style="border-radius: var(--radius-lg); box-shadow: var(--shadow-md);">
+                    </div>
+
+                    <div class="about-card">
+                        <p>
+                            আমি <strong>অন্তু দাস</strong>, আধুনিক ও রেসপন্সিভ ওয়েবসাইট ডেভেলপমেন্টের কাজে নিয়োজিত। নতুন নতুন প্রযুক্তি শেখা ও সেগুলোকে প্র্যাকটিক্যাল প্রজেক্টে ব্যবহার করা আমার বেশ পছন্দ।
+                        </p>
+                        <p>
+                            ওয়েব অ্যাপ্লিকেশন তৈরি করার পাশাপাশি ক্লিন কোড স্ট্রাকচার ও ফাস্ট লোডিং স্পিড নিশ্চিত করাই আমার মূল লক্ষ্য। আমি ক্লায়েন্টের চাহিদা অনুযায়ী কাস্টম সমাধান দিয়ে থাকি।
+                        </p>
+
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="label">নাম:</span>
+                                <span class="val">অন্তু দাস (Antu Das)</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">অবস্থান:</span>
+                                <span class="val">বাংলাদেশ</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">ইমেইল:</span>
+                                <span class="val">antu.das@example.com</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">অভিজ্ঞতা:</span>
+                                <span class="val">২+ বছর (ওয়েব ডিজাইন)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="section-padding" id="skills" style="background-color: var(--white);">
+            <div class="container">
+                <div class="section-title-wrapper">
+                    <span class="section-subtitle">দক্ষতা</span>
+                    <h2 class="section-title">আমার স্কিলসমূহ</h2>
+                </div>
+
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <div class="skill-icon">
+                            <i class="fa-brands fa-html5"></i>
+                        </div>
+                        <h3>HTML5 & Semantics</h3>
+                        <p>সঠিক ও সুগঠিত এইচটিএমএল দিয়ে অ্যাক্সেসিবল ওয়েবসাইট পেজ স্ট্রাকচার তৈরি।</p>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-icon">
+                            <i class="fa-brands fa-css3-alt"></i>
+                        </div>
+                        <h3>CSS3 & Responsive Design</h3>
+                        <p>ফ্লেক্সবক্স, গ্রিড এবং আধুনিক রেসপন্সিভ টেকনিক দিয়ে আকর্ষণীয় লেআউট ডিজাইন।</p>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-icon">
+                            <i class="fa-brands fa-js"></i>
+                        </div>
+                        <h3>JavaScript (ES6+)</h3>
+                        <p>ইন্টারেক্টিভ স্লাইডার, পপআপ এবং ডাইনামিক ফিচার যুক্ত করার দক্ষতা।</p>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-icon">
+                            <i class="fa-solid fa-mobile-screen"></i>
+                        </div>
+                        <h3>Mobile-First Layout</h3>
+                        <p>মোবাইল, ট্যাবলেট এবং ডেস্কটপ—সব ডিভাইসে পারফেক্ট ডিসপ্লে ফিটিং।</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section class="section-padding" id="projects">
+            <div class="container">
+                <div class="section-title-wrapper">
+                    <span class="section-subtitle">পোর্টফোলিও</span>
+                    <h2 class="section-title">সাম্প্রতিক প্রজেক্টসমূহ</h2>
+                </div>
+
+                <div class="projects-grid">
+                    <!-- Project 1 -->
+                    <div class="project-card">
+                        <div class="project-img">
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop" alt="E-Commerce Website">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">HTML</span>
+                                <span class="tag">CSS</span>
+                                <span class="tag">JS</span>
+                            </div>
+                            <h3>ই-কমার্স ল্যান্ডিং পেজ</h3>
+                            <p>অনলাইন শপের জন্য ক্যাটাগরি শোপিক ও ইন্টারঅ্যাক্টিভ প্রোডাক্ট উইজেটসহ সম্পূর্ণ রেসপন্সিভ ডিজাইন।</p>
+                            <a href="#contact" class="project-link">বিস্তারিত দেখুন <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="project-card">
+                        <div class="project-img">
+                            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800&auto=format&fit=crop" alt="Corporate Dashboard">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">UI/UX</span>
+                                <span class="tag">CSS Grid</span>
+                            </div>
+                            <h3>বিজনেস ড্যাশবোর্ড</h3>
+                            <p>করপোরেট ও বিজনেস প্ল্যাটফর্মের জন্য ক্লিন ও অর্গানাইজড ডেটা ভিউ প্ল্যাটফর্ম।</p>
+                            <a href="#contact" class="project-link">বিস্তারিত দেখুন <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="project-card">
+                        <div class="project-img">
+                            <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?q=80&w=800&auto=format&fit=crop" alt="Personal Blog">
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">HTML5</span>
+                                <span class="tag">Clean UI</span>
+                            </div>
+                            <h3>ব্যক্তিগত ব্লগ ওয়েবসাইট</h3>
+                            <p>পড়ার জন্য সুবিধাজনক টাইপোগ্রাফি ও রীডার-ফ্রেন্ডলি লেআউটের কাস্টম ব্লগ পেজ।</p>
+                            <a href="#contact" class="project-link">বিস্তারিত দেখুন <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="section-padding" id="contact" style="background-color: var(--white);">
+            <div class="container">
+                <div class="section-title-wrapper">
+                    <span class="section-subtitle">মেসেজ পাঠান</span>
+                    <h2 class="section-title">যোগাযোগ করুন</h2>
+                </div>
+
+                <div class="contact-card-wrapper">
+                    <div class="contact-info">
+                        <h3>কথা বলুন আমার সাথে</h3>
+                        <p>আপনার প্রজেক্ট বা নতুন কোনো কাজের আইডিয়া নিয়ে সরাসরি বার্তা পাঠাতে পারেন।</p>
+
+                        <div class="contact-details-item">
+                            <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+                            <div>
+                                <strong style="display:block; font-size:0.85rem; color: var(--text-muted);">ইমেইল</strong>
+                                <span>antu.das@example.com</span>
+                            </div>
+                        </div>
+
+                        <div class="contact-details-item">
+                            <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+                            <div>
+                                <strong style="display:block; font-size:0.85rem; color: var(--text-muted);">ফোন / হোয়াটসঅ্যাপ</strong>
+                                <span>+880 1700-000000</span>
+                            </div>
+                        </div>
+
+                        <div class="social-links">
+                            <a href="https://facebook.com" target="_blank" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a>
+                            <a href="https://github.com" target="_blank" class="social-icon"><i class="fa-brands fa-github"></i></a>
+                            <a href="https://linkedin.com" target="_blank" class="social-icon"><i class="fa-brands fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Form -->
+                    <form onsubmit="handleFormSubmit(event)">
+                        <div class="form-group">
+                            <label for="name">আপনার নাম</label>
+                            <input type="text" id="name" class="form-input" placeholder="আপনার পুরো নাম লিখুন" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">ইমেইল ঠিকানা</label>
+                            <input type="email" id="email" class="form-input" placeholder="আপনার ইমেইল নাম লিখুন" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">বার্তা (Message)</label>
+                            <textarea id="message" class="form-textarea" placeholder="আপনার প্রজেক্ট বা বার্তা বিস্তারিত লিখুন..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">
+                            <i class="fa-solid fa-paper-plane"></i> বার্তা পাঠান
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; ২০২৬ <span>Antu Das</span>। সর্বস্বত্ব সংরক্ষিত।</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Interaction Logic -->
+    <script>
+        // --- 1. Sticky Navbar & Mobile Menu Toggle ---
+        const header = document.getElementById('header');
+        const navMenu = document.getElementById('nav-menu');
+        const navToggle = document.getElementById('nav-toggle');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                navLinks.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+            });
+        });
+
+        // --- 2. Interactive Image Slider / Carousel ---
+        const sliderWrapper = document.getElementById('slider-wrapper');
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const dotsContainer = document.getElementById('slider-dots');
+
+        let currentIndex = 0;
+        const totalSlides = slides.length;
+        let slideInterval;
+
+        // Create Indicators / Dots
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(i));
+            dotsContainer.appendChild(dot);
+        }
+
+        const dots = document.querySelectorAll('.dot');
+
+        function updateSlider() {
+            sliderWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+            dots.forEach((dot, idx) => {
+                dot.classList.toggle('active', idx === currentIndex);
+            });
+        }
+
+        function goToSlide(index) {
+            currentIndex = index;
+            updateSlider();
+            resetAutoPlay();
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            updateSlider();
+        }
+
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            updateSlider();
+        }
+
+        nextBtn.addEventListener('click', () => {
+            nextSlide();
+            resetAutoPlay();
+        });
+
+        prevBtn.addEventListener('click', () => {
+            prevSlide();
+            resetAutoPlay();
+        });
+
+        // Auto-play feature
+        function startAutoPlay() {
+            slideInterval = setInterval(nextSlide, 4000);
+        }
+
+        function resetAutoPlay() {
+            clearInterval(slideInterval);
+            startAutoPlay();
+        }
+
+        // Start slider loop
+        startAutoPlay();
+
+        // --- 3. Form Submit Feedback ---
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            alert(`ধন্যবাদ ${name}! আপনার বার্তাটি সফলভাবে পাঠানো হয়েছে।`);
+            e.target.reset();
+        }
+    </script>
 </body>
 </html>
